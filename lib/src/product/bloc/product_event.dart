@@ -33,9 +33,13 @@ class FilterViewChanged extends ProductEvent {
 }
 
 class FiltersRemoved extends ProductEvent {
-  FiltersRemoved(this.productFilterType, {this.remove = false});
+  FiltersRemoved(
+      // this.productFilterType,
+      {
+    this.remove = false,
+  });
 
-  final ProductFilterType productFilterType;
+  // final ProductFilterType productFilterType;
   final bool remove;
 }
 

@@ -1,6 +1,6 @@
 import 'package:fake_store/src/categories/views/categories_bar.dart';
 import 'package:fake_store/src/product/bloc/product_bloc.dart';
-import 'package:fake_store/src/product/views/widgets/product_filter_view.dart';
+import 'package:fake_store/src/product/views/product_filter_view.dart';
 import 'package:fake_store/src/product/views/widgets/products_grid_widget.dart';
 import 'package:fake_store/src/product/views/widgets/products_list_widget.dart';
 import 'package:flutter/material.dart';

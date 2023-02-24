@@ -57,18 +57,34 @@ class ProductFilterView extends StatelessWidget {
                 return const PriceFilterPage();
               }
 
-              return const Text('Nothing');
+              return const RatingFilterPage();
             },
           ),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          context.read<ProductBloc>().add(ProductsFiltered());
-          Navigator.pop(context);
-        },
-        label: const Text('Submit'),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FloatingActionButton.extended(
+            heroTag: 'clear',
+            onPressed: () {
+              context.read<ProductBloc>().add(FiltersRemoved());
+            },
+            label: const Text('Clear Filters'),
+          ),
+          SizedBox(
+            width: 2.w,
+          ),
+          FloatingActionButton.extended(
+            heroTag: 'submit',
+            onPressed: () {
+              context.read<ProductBloc>().add(ProductsFiltered());
+              Navigator.pop(context);
+            },
+            label: const Text('Submit'),
+          ),
+        ],
       ),
     );
   }
@@ -110,6 +126,53 @@ class _PriceFilterPageState extends State<PriceFilterPage> {
                     context
                         .read<ProductBloc>()
                         .add(PriceFilterChanged(choices[index]));
+                  },
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
+class RatingFilterPage extends StatefulWidget {
+  const RatingFilterPage({
+    super.key,
+  });
+  @override
+  State<RatingFilterPage> createState() => _RatingFilterPageState();
+}
+
+class _RatingFilterPageState extends State<RatingFilterPage> {
+  final choices = [
+    4,
+    3,
+    2,
+    1,
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 60.w,
+      child: ListView.builder(
+        padding: const EdgeInsets.only(left: 12),
+        itemCount: choices.length,
+        itemBuilder: (BuildContext context, int index) {
+          final choice = choices[index];
+          return BlocBuilder<ProductBloc, ProductState>(
+            builder: (context, state) {
+              return Align(
+                alignment: Alignment.centerLeft,
+                child: ChoiceChip(
+                  label: Text('Rating $choice+'),
+                  selected: state.ratingFilter == choice,
+                  selectedColor: Colors.lightBlue,
+                  onSelected: (bool selected) {
+                    context
+                        .read<ProductBloc>()
+                        .add(RatingFilterChanged(choices[index]));
                   },
                 ),
               );

@@ -65,7 +65,11 @@ class ProductView extends StatelessWidget {
                         ],
                       ),
                       SizedBox(
-                        height: 2.h,
+                        height: 1.h,
+                      ),
+                      Text('Rating : ${product.rating.rate}'),
+                      SizedBox(
+                        height: 1.h,
                       ),
                       Theme(
                         data: Theme.of(context)

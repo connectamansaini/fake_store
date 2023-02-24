@@ -116,12 +116,25 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ) {
     final filteredList = <Product>[];
     final list = List.of(state.products);
-    if (state.priceFilter != 0) {
+    var flag = false;
+    if (state.priceFilter != 0 && state.ratingFilter != 0) {
+      filteredList.addAll(
+        list
+            .where(
+              (product) =>
+                  product.price <= state.priceFilter &&
+                  product.rating.rate >= state.ratingFilter,
+            )
+            .toList(),
+      );
+      flag = true;
+    }
+    if (state.priceFilter != 0 && flag == false) {
       filteredList.addAll(
         list.where((product) => product.price <= state.priceFilter).toList(),
       );
     }
-    if (state.ratingFilter != 0) {
+    if (state.ratingFilter != 0 && flag == false) {
       filteredList.addAll(
         list
             .where((product) => product.rating.rate >= state.ratingFilter)
