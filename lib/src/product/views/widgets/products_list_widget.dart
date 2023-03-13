@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fake_store/src/product/models/product.dart';
 import 'package:fake_store/src/product/views/product_view.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class ProductsListWidget extends StatelessWidget {
               ),
             ),
             leading: Image(
-              image: NetworkImage(products[index].image),
+              image: CachedNetworkImageProvider(products[index].image),
             ),
             title: Text(products[index].title),
             //This is too delete one product item

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fake_store/src/product/models/product.dart';
 import 'package:fake_store/src/product/views/product_view.dart';
 import 'package:flutter/material.dart';
@@ -32,18 +33,18 @@ class ProductGridWidget extends StatelessWidget {
               footer: Text(
                 products[index].title,
                 textAlign: TextAlign.center,
-                maxLines: 2,
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
               child: Padding(
                 padding: const EdgeInsets.only(
-                  bottom: 32,
+                  bottom: 18,
                   left: 16,
                   right: 16,
                   top: 8,
                 ),
                 child: Image(
-                  image: NetworkImage(products[index].image),
+                  image: CachedNetworkImageProvider(products[index].image),
                 ),
               ),
             ),
